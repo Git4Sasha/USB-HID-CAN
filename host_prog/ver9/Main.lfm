@@ -1,0 +1,266 @@
+object Form1: TForm1
+  Left = 485
+  Height = 622
+  Top = 148
+  Width = 720
+  HorzScrollBar.Smooth = True
+  HorzScrollBar.Tracking = True
+  Caption = 'HID USB to CAN'
+  ClientHeight = 602
+  ClientWidth = 720
+  Menu = MainMenu1
+  OnClose = FormClose
+  OnCreate = FormCreate
+  LCLVersion = '1.8.4.0'
+  object btnOpenDev: TButton
+    Left = 359
+    Height = 22
+    Top = 2
+    Width = 75
+    Caption = 'Открыть'
+    OnClick = btnOpenDevClick
+    TabOrder = 0
+  end
+  object btnCloseDev: TButton
+    Left = 472
+    Height = 22
+    Top = 2
+    Width = 75
+    Caption = 'Закрыть'
+    OnClick = btnCloseDevClick
+    TabOrder = 1
+  end
+  object btnSendRow: TButton
+    Left = 555
+    Height = 22
+    Top = 2
+    Width = 157
+    Caption = 'Отправить выделенное'
+    OnClick = btnSendRowClick
+    TabOrder = 2
+  end
+  object s4ShowConnectStatus: TShape
+    Left = 439
+    Height = 22
+    Top = 2
+    Width = 22
+    Brush.Color = clRed
+    Shape = stCircle
+  end
+  object cbDeviceList: TComboBox
+    Left = 0
+    Height = 23
+    Top = 0
+    Width = 323
+    ItemHeight = 15
+    Style = csDropDownList
+    TabOrder = 3
+  end
+  object btnGetDevList: TButton
+    Left = 328
+    Height = 22
+    Hint = 'Получить список устройств'
+    Top = 2
+    Width = 24
+    Caption = 'У'
+    OnClick = btnGetDevListClick
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 4
+  end
+  object PairSplitter1: TPairSplitter
+    Cursor = crVSplit
+    Left = 0
+    Height = 567
+    Top = 32
+    Width = 711
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    Color = clGray
+    Position = 192
+    SplitterType = pstVertical
+    object PairSplitterSide1: TPairSplitterSide
+      Cursor = crArrow
+      Left = 0
+      Height = 192
+      Top = 0
+      Width = 711
+      ClientWidth = 711
+      ClientHeight = 192
+      object StringGrid1: TStringGrid
+        Left = 0
+        Height = 192
+        Top = 0
+        Width = 711
+        Align = alClient
+        ColCount = 12
+        Columns = <        
+          item
+            Title.Caption = 'CAN_ID'
+            Width = 55
+          end        
+          item
+            Title.Caption = 'Len'
+            Width = 40
+          end        
+          item
+            Title.Caption = 'B0'
+            Width = 30
+          end        
+          item
+            Title.Caption = 'B1'
+            Width = 30
+          end        
+          item
+            Title.Caption = 'B2'
+            Width = 30
+          end        
+          item
+            Title.Caption = 'B3'
+            Width = 30
+          end        
+          item
+            Title.Caption = 'B4'
+            Width = 30
+          end        
+          item
+            Title.Caption = 'B5'
+            Width = 30
+          end        
+          item
+            Title.Caption = 'B6'
+            Width = 30
+          end        
+          item
+            Title.Caption = 'B7'
+            Width = 30
+          end        
+          item
+            Title.Caption = 'Описание'
+            Width = 250
+          end>
+        Flat = True
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goEditing, goAlwaysShowEditor, goThumbTracking, goSmoothScroll, goRowHighlight]
+        RowCount = 20
+        ScrollBars = ssVertical
+        TabOrder = 0
+        OnSelectCell = StringGrid1SelectCell
+      end
+    end
+    object PairSplitterSide2: TPairSplitterSide
+      Cursor = crArrow
+      Left = 0
+      Height = 370
+      Top = 197
+      Width = 711
+      ClientWidth = 711
+      ClientHeight = 370
+      object btnClearFiltrCANIDList: TButton
+        Left = 324
+        Height = 22
+        Top = 8
+        Width = 65
+        Caption = 'Очистка'
+        OnClick = btnClearFiltrCANIDListClick
+        TabOrder = 0
+      end
+      object cbFiltrCANIDList: TComboBox
+        Left = 228
+        Height = 23
+        Hint = 'Список фильтров по идентификаторам'
+        Top = 8
+        Width = 88
+        ArrowKeysTraverseList = False
+        ItemHeight = 15
+        OnKeyDown = cbFiltrCANIDListKeyDown
+        OnKeyPress = cbFiltrCANIDListKeyPress
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 1
+      end
+      object enBufLen: TEditNum
+        Left = 167
+        Height = 20
+        Top = 8
+        Width = 50
+        AutoSize = False
+        BadColor = clRed
+        BorderStyle = bsNone
+        OnKeyPress = enBufLenKeyPress
+        TabOrder = 2
+        Text = '10000'
+      end
+      object cbStopList: TCheckBox
+        Left = 80
+        Height = 19
+        Top = 12
+        Width = 84
+        Caption = 'Остановить'
+        TabOrder = 3
+      end
+      object btnClear: TButton
+        Left = 0
+        Height = 22
+        Top = 9
+        Width = 75
+        Caption = 'Очистка'
+        OnClick = btnClearClick
+        TabOrder = 4
+      end
+      object lb4CANMsg: TListBox
+        Left = 0
+        Height = 330
+        Top = 40
+        Width = 711
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        Columns = 1
+        ExtendedSelect = False
+        ItemHeight = 0
+        ScrollWidth = 710
+        TabOrder = 5
+      end
+    end
+  end
+  object tm4UpdateMsgList: TTimer
+    Enabled = False
+    Interval = 40
+    OnTimer = tm4UpdateMsgListTimer
+    left = 312
+    top = 96
+  end
+  object opdCommon: TOpenDialog
+    DefaultExt = '.txt'
+    left = 431
+    top = 105
+  end
+  object svdCommon: TSaveDialog
+    DefaultExt = '.txt'
+    left = 527
+    top = 117
+  end
+  object MainMenu1: TMainMenu
+    left = 129
+    top = 104
+    object mmiFile: TMenuItem
+      Caption = 'Файл'
+      object miSaveSends: TMenuItem
+        Caption = 'Сохранить список передач'
+        OnClick = miSaveSendsClick
+      end
+      object miLoadSends: TMenuItem
+        Caption = 'Загрузить список передач'
+        OnClick = miLoadSendsClick
+      end
+      object MenuItem3: TMenuItem
+        Caption = '-'
+      end
+      object miSaveRecv: TMenuItem
+        Caption = 'Сохранить принятые данные'
+        OnClick = miSaveRecvClick
+      end
+      object miClose: TMenuItem
+        Caption = 'Выйти'
+        OnClick = miCloseClick
+      end
+    end
+  end
+end
